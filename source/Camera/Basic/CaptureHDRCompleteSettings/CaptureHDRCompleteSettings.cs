@@ -27,16 +27,28 @@ class Program
                 Brightness = 1,
                 Bidirectional = false,
                 BlueBalance = 1.081,
-                RedBalance = 1.709
+                RedBalance = 1.709,
+                Filters = {
+                    Contrast = {
+                        Enabled = true,
+                        Threshold = 5,
+                    },
+                    Gaussian = {
+                        Enabled = true,
+                        Sigma = 2.245,
+                    },
+                    Outlier = {
+                        Enabled = true,
+                        Threshold = 5,
+                    },
+                    Reflection = {
+                        Enabled = true
+                    },
+                    Saturated = {
+                        Enabled = true
+                    }
+                },
             };
-            settingsDefault.Filters.Contrast.Enabled = true;
-            settingsDefault.Filters.Contrast.Threshold = 5;
-            settingsDefault.Filters.Gaussian.Enabled = true;
-            settingsDefault.Filters.Gaussian.Sigma = 1.5;
-            settingsDefault.Filters.Outlier.Enabled = true;
-            settingsDefault.Filters.Outlier.Threshold = 5;
-            settingsDefault.Filters.Reflection.Enabled = true;
-            settingsDefault.Filters.Saturated.Enabled = true;
 
             Console.WriteLine("Configuring settings different for all HDR frames");
             ulong[] iris = { 17, 27, 27 };
