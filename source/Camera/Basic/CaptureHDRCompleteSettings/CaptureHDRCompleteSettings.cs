@@ -22,34 +22,6 @@ class Program
 
             Console.WriteLine("Configuring settings same for all HDR frames");
 
-            var settingsDefault = new Zivid.NET.Settings
-            {
-                Brightness = 1,
-                Bidirectional = false,
-                BlueBalance = 1.081,
-                RedBalance = 1.709,
-                Filters = {
-                    Contrast = {
-                        Enabled = true,
-                        Threshold = 5,
-                    },
-                    Gaussian = {
-                        Enabled = true,
-                        Sigma = 2.245,
-                    },
-                    Outlier = {
-                        Enabled = true,
-                        Threshold = 5,
-                    },
-                    Reflection = {
-                        Enabled = true
-                    },
-                    Saturated = {
-                        Enabled = true
-                    }
-                },
-            };
-
             Console.WriteLine("Configuring settings different for all HDR frames");
             ulong[] iris = { 17, 27, 27 };
             long[] exposureTime = { 10000, 10000, 40000 };
@@ -57,10 +29,37 @@ class Program
             var settingsHDR = new List<Zivid.NET.Settings>();
             for (int i = 0; i < 3; ++i)
             {
-                settingsDefault.Iris = iris[i];
-                settingsDefault.ExposureTime = Duration.FromMicroseconds(exposureTime[i]);
-                settingsDefault.Gain = gain[i];
-                settingsHDR.Add(settingsDefault);
+                var settings = new Zivid.NET.Settings
+                {
+                    Brightness = 1,
+                    Bidirectional = false,
+                    BlueBalance = 1.081,
+                    RedBalance = 1.709,
+                    Filters = {
+                        Contrast = {
+                            Enabled = true,
+                            Threshold = 5,
+                        },
+                        Gaussian = {
+                            Enabled = true,
+                            Sigma = 2.245,
+                        },
+                        Outlier = {
+                            Enabled = true,
+                            Threshold = 5,
+                        },
+                        Reflection = {
+                            Enabled = true
+                        },
+                        Saturated = {
+                            Enabled = true
+                        }
+                    },
+                };
+                settings.Iris = iris[i];
+                settings.ExposureTime = Duration.FromMicroseconds(exposureTime[i]);
+                settings.Gain = gain[i];
+                settingsHDR.Add(settings);
                 Console.WriteLine("Frame " + i + " " + settingsHDR[i].ToString());
             }
 
