@@ -20,9 +20,7 @@ class Program
             Console.WriteLine("Connecting to the camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Configuring settings same for all HDR frames");
-
-            Console.WriteLine("Configuring settings different for all HDR frames");
+            Console.WriteLine("Configuring settings for all HDR frames");
             ulong[] iris = { 17, 27, 27 };
             long[] exposureTime = { 10000, 10000, 40000 };
             double[] gain = { 1.0, 1.0, 2.0 };
@@ -32,6 +30,9 @@ class Program
                 var settings = new Zivid.NET.Settings
                 {
                     Brightness = 1,
+                    Iris = iris[i],
+                    ExposureTime = Duration.FromMicroseconds(exposureTime[i]),
+                    Gain = gain[i],
                     Bidirectional = false,
                     BlueBalance = 1.081,
                     RedBalance = 1.709,
@@ -56,9 +57,6 @@ class Program
                         }
                     },
                 };
-                settings.Iris = iris[i];
-                settings.ExposureTime = Duration.FromMicroseconds(exposureTime[i]);
-                settings.Gain = gain[i];
                 settingsHDR.Add(settings);
                 Console.WriteLine("Frame " + i + " " + settingsHDR[i].ToString());
             }
