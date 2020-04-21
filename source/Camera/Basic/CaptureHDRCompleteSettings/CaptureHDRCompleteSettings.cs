@@ -62,10 +62,11 @@ class Program
             }
 
             Console.WriteLine("Capturing the HDR frame");
-            var hdrFrame = Zivid.NET.HDR.Capture(camera, settingsHDR);
-
-            Console.WriteLine("Saving the frame");
-            hdrFrame.Save("HDR.zdf");
+            using (var hdrFrame = Zivid.NET.HDR.Capture(camera, settingsHDR))
+            {
+                Console.WriteLine("Saving the frame");
+                hdrFrame.Save("HDR.zdf");
+            }
         }
         catch (Exception ex)
         {
