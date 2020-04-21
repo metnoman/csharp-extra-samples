@@ -34,11 +34,12 @@ class Program
                 }
 
                 Console.WriteLine("Capture the HDR frame");
-                var hdrFrame = Zivid.NET.HDR.Capture(camera, settingsList);
-
-                string hdr_path = "HDR_" + set + ".zdf";
-                Console.WriteLine("Saving the HDR to " + hdr_path);
-                hdrFrame.Save(hdr_path);
+                using (var hdrFrame = Zivid.NET.HDR.Capture(camera, settingsList))
+                {
+                    string hdr_path = "HDR_" + set + ".zdf";
+                    Console.WriteLine("Saving the HDR to " + hdr_path);
+                    hdrFrame.Save(hdr_path);
+                }
             }
         }
         catch (Exception ex)
